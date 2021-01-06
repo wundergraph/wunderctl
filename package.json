@@ -1,0 +1,33 @@
+{
+  "name": "wunderctl",
+  "version": "0.0.1",
+  "description": "WunderGraph Command Line Interface",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "devinstall": "ts-node src/install.ts",
+    "postinstall": "node dist/install.js",
+    "postuninstall": "node dist/uninstall.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wundergraph/wunderctl.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/wundergraph/wunderctl/issues"
+  },
+  "homepage": "https://github.com/wundergraph/wunderctl#readme",
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^14.14.20",
+    "@types/rimraf": "^3.0.0",
+    "@types/tar": "^4.0.4",
+    "axios": "^0.21.1",
+    "os": "^0.1.1",
+    "rimraf": "^3.0.2",
+    "tar": "^6.0.5",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}
