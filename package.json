@@ -1,10 +1,11 @@
 {
-  "name": "wunderctl",
+  "name": "@wundergraph/wunderctl",
   "version": "0.0.1",
   "description": "WunderGraph Command Line Interface",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "set-version": "node dist/set-version.js",
     "devinstall": "ts-node src/install.ts",
     "postinstall": "node dist/install.js",
     "postuninstall": "node dist/uninstall.js"
