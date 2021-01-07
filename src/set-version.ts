@@ -7,8 +7,8 @@ const setVersion = () => {
         process.exit(1);
         return
     }
+    console.log(`detected version: ${version}`);
     const shortVersion = version.replaceAll("v","");
-    console.log(`detected version: ${shortVersion}`);
     try {
         const packageJSON = JSON.parse(fs.readFileSync("package.json").toString());
         packageJSON["version"] = shortVersion;
