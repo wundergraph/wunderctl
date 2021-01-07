@@ -15,5 +15,5 @@ jobs:
       - run: yarn
       - run: yarn set-version
       - run: yarn publish --access public
-          env:
-            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
