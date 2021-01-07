@@ -15,6 +15,6 @@ jobs:
           scope: '@wundergraph'
       - run: yarn
       - run: yarn set-version
-      - run: yarn publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+#      - run: yarn publish --access public
+#        env:
+#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
