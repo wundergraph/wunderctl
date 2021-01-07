@@ -12,5 +12,6 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
           scope: '@wundergraph'
+      - run: yarn
       - run: yarn set-version
       - run: cat package.json
