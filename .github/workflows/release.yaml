@@ -1,4 +1,4 @@
-name: Node.js Package
+name: publish
 on:
   release:
     types: [edited]
@@ -12,9 +12,5 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
           scope: '@wundergraph'
-#      - run: yarn
       - run: set-version
       - run: cat package.json
-#      - run: yarn publish
-#        env:
-#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
