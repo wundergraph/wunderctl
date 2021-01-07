@@ -8,10 +8,9 @@ const setVersion = () => {
         return
     }
     console.log(`detected version: ${version}`);
-    const shortVersion = version.replaceAll("v","");
     try {
         const packageJSON = JSON.parse(fs.readFileSync("package.json").toString());
-        packageJSON["version"] = shortVersion;
+        packageJSON["version"] = version;
         fs.writeFileSync("package.json",JSON.stringify(packageJSON,null,"  "));
         console.log("version updated successfully");
     } catch (e) {
