@@ -1,42 +1,51 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __markAsModule = (target) => __defProp(target, "__esModule", {value: true});
+var __export = (target, all) => {
+  __markAsModule(target);
+  for (var name in all)
+    __defProp(target, name, {get: all[name], enumerable: true});
+};
+var __exportStar = (target, module2, desc) => {
+  __markAsModule(target);
+  if (module2 && typeof module2 === "object" || typeof module2 === "function") {
+    for (let key of __getOwnPropNames(module2))
+      if (!__hasOwnProp.call(target, key) && key !== "default")
+        __defProp(target, key, {get: () => module2[key], enumerable: !(desc = __getOwnPropDesc(module2, key)) || desc.enumerable});
+  }
+  return target;
+};
+var __toModule = (module2) => {
+  if (module2 && module2.__esModule)
+    return module2;
+  return __exportStar(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", {value: module2, enumerable: true}), module2);
+};
+
+// src/set-version.ts
+__export(exports, {
+  default: () => set_version_default
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var fs = __toModule(require("fs"));
+var setVersion = () => {
+  const githubRef = "" + process.env.GITHUB_REF;
+  if (githubRef === "") {
+    console.log(`cannot set version, env var missing: GITHUB_REF`);
+    process.exit(1);
+    return;
+  }
+  const version = githubRef.substring("refs/tags/v".length);
+  console.log(`detected version: ${version}`);
+  try {
+    const packageJSON = JSON.parse(fs.readFileSync("package.json").toString());
+    packageJSON["version"] = version;
+    fs.writeFileSync("package.json", JSON.stringify(packageJSON, null, "  "));
+    console.log("version updated successfully");
+  } catch (e) {
+    console.log(`error updating package.json: ${e.message}`);
+  }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs = __importStar(require("fs"));
-const setVersion = () => {
-    const githubRef = "" + process.env.GITHUB_REF;
-    if (githubRef === "") {
-        console.log(`cannot set version, env var missing: GITHUB_REF`);
-        process.exit(1);
-        return;
-    }
-    const version = githubRef.substring("refs/tags/v".length);
-    console.log(`detected version: ${version}`);
-    try {
-        const packageJSON = JSON.parse(fs.readFileSync("package.json").toString());
-        packageJSON["version"] = version;
-        fs.writeFileSync("package.json", JSON.stringify(packageJSON, null, "  "));
-        console.log("version updated successfully");
-    }
-    catch (e) {
-        console.log(`error updating package.json: ${e.message}`);
-    }
-};
-exports.default = setVersion();
+var set_version_default = setVersion();
