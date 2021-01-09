@@ -1,10 +1,10 @@
 import * as fs from "fs";
 import rimraf from "rimraf";
-import {binaryInfo} from "./binarypath";
+import {wunderctlPath} from "./binarypath";
 
 const uninstall = () => {
     console.log("uninstalling wunderctl");
-    const {binaryPath} = binaryInfo();
+    const binaryPath = wunderctlPath();
     const exists = fs.existsSync(binaryPath);
     if (!exists){
         console.log("wunderctl not found at install dir");

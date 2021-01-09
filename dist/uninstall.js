@@ -519,9 +519,9 @@ var require_brace_expansion = __commonJS((exports2, module2) => {
 var require_minimatch = __commonJS((exports2, module2) => {
   module2.exports = minimatch;
   minimatch.Minimatch = Minimatch;
-  var path = {sep: "/"};
+  var path2 = {sep: "/"};
   try {
-    path = require("path");
+    path2 = require("path");
   } catch (er) {
   }
   var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {};
@@ -604,8 +604,8 @@ var require_minimatch = __commonJS((exports2, module2) => {
     if (!options)
       options = {};
     pattern = pattern.trim();
-    if (path.sep !== "/") {
-      pattern = pattern.split(path.sep).join("/");
+    if (path2.sep !== "/") {
+      pattern = pattern.split(path2.sep).join("/");
     }
     this.options = options;
     this.set = [];
@@ -972,8 +972,8 @@ var require_minimatch = __commonJS((exports2, module2) => {
     if (f === "/" && partial)
       return true;
     var options = this.options;
-    if (path.sep !== "/") {
-      f = f.split(path.sep).join("/");
+    if (path2.sep !== "/") {
+      f = f.split(path2.sep).join("/");
     }
     f = f.split(slashSplit);
     this.debug(this.pattern, "split", f);
@@ -1127,12 +1127,12 @@ var require_inherits = __commonJS((exports2, module2) => {
 // node_modules/path-is-absolute/index.js
 var require_path_is_absolute = __commonJS((exports2, module2) => {
   "use strict";
-  function posix(path) {
-    return path.charAt(0) === "/";
+  function posix(path2) {
+    return path2.charAt(0) === "/";
   }
-  function win32(path) {
+  function win32(path2) {
     var splitDeviceRe = /^([a-zA-Z]:|[\\\/]{2}[^\\\/]+[\\\/]+[^\\\/]+)?([\\\/])?([\s\S]*?)$/;
-    var result = splitDeviceRe.exec(path);
+    var result = splitDeviceRe.exec(path2);
     var device = result[1] || "";
     var isUnc = Boolean(device && device.charAt(1) !== ":");
     return Boolean(result[2] || isUnc);
@@ -1156,7 +1156,7 @@ var require_common = __commonJS((exports2) => {
   function ownProp(obj, field) {
     return Object.prototype.hasOwnProperty.call(obj, field);
   }
-  var path = require("path");
+  var path2 = require("path");
   var minimatch = require_minimatch();
   var isAbsolute = require_path_is_absolute();
   var Minimatch = minimatch.Minimatch;
@@ -1223,11 +1223,11 @@ var require_common = __commonJS((exports2) => {
     if (!ownProp(options, "cwd"))
       self.cwd = cwd;
     else {
-      self.cwd = path.resolve(options.cwd);
+      self.cwd = path2.resolve(options.cwd);
       self.changedCwd = self.cwd !== cwd;
     }
-    self.root = options.root || path.resolve(self.cwd, "/");
-    self.root = path.resolve(self.root);
+    self.root = options.root || path2.resolve(self.cwd, "/");
+    self.root = path2.resolve(self.root);
     if (process.platform === "win32")
       self.root = self.root.replace(/\\/g, "/");
     self.cwdAbs = isAbsolute(self.cwd) ? self.cwd : makeAbs(self, self.cwd);
@@ -1308,30 +1308,30 @@ var require_common = __commonJS((exports2) => {
   function makeAbs(self, f) {
     var abs = f;
     if (f.charAt(0) === "/") {
-      abs = path.join(self.root, f);
+      abs = path2.join(self.root, f);
     } else if (isAbsolute(f) || f === "") {
       abs = f;
     } else if (self.changedCwd) {
-      abs = path.resolve(self.cwd, f);
+      abs = path2.resolve(self.cwd, f);
     } else {
-      abs = path.resolve(f);
+      abs = path2.resolve(f);
     }
     if (process.platform === "win32")
       abs = abs.replace(/\\/g, "/");
     return abs;
   }
-  function isIgnored(self, path2) {
+  function isIgnored(self, path3) {
     if (!self.ignore.length)
       return false;
     return self.ignore.some(function(item) {
-      return item.matcher.match(path2) || !!(item.gmatcher && item.gmatcher.match(path2));
+      return item.matcher.match(path3) || !!(item.gmatcher && item.gmatcher.match(path3));
     });
   }
-  function childrenIgnored(self, path2) {
+  function childrenIgnored(self, path3) {
     if (!self.ignore.length)
       return false;
     return self.ignore.some(function(item) {
-      return !!(item.gmatcher && item.gmatcher.match(path2));
+      return !!(item.gmatcher && item.gmatcher.match(path3));
     });
   }
 });
@@ -1346,7 +1346,7 @@ var require_sync = __commonJS((exports2, module2) => {
   var Minimatch = minimatch.Minimatch;
   var Glob = require_glob().Glob;
   var util = require("util");
-  var path = require("path");
+  var path2 = require("path");
   var assert = require("assert");
   var isAbsolute = require_path_is_absolute();
   var common = require_common();
@@ -1474,7 +1474,7 @@ var require_sync = __commonJS((exports2, module2) => {
             e = prefix + e;
         }
         if (e.charAt(0) === "/" && !this.nomount) {
-          e = path.join(this.root, e);
+          e = path2.join(this.root, e);
         }
         this._emitMatch(index, e);
       }
@@ -1623,9 +1623,9 @@ var require_sync = __commonJS((exports2, module2) => {
     if (prefix && isAbsolute(prefix) && !this.nomount) {
       var trail = /[\/\\]$/.test(prefix);
       if (prefix.charAt(0) === "/") {
-        prefix = path.join(this.root, prefix);
+        prefix = path2.join(this.root, prefix);
       } else {
-        prefix = path.resolve(this.root, prefix);
+        prefix = path2.resolve(this.root, prefix);
         if (trail)
           prefix += "/";
       }
@@ -1813,7 +1813,7 @@ var require_glob = __commonJS((exports2, module2) => {
   var Minimatch = minimatch.Minimatch;
   var inherits = require_inherits();
   var EE = require("events").EventEmitter;
-  var path = require("path");
+  var path2 = require("path");
   var assert = require("assert");
   var isAbsolute = require_path_is_absolute();
   var globSync = require_sync();
@@ -2096,7 +2096,7 @@ var require_glob = __commonJS((exports2, module2) => {
             e = prefix + e;
         }
         if (e.charAt(0) === "/" && !this.nomount) {
-          e = path.join(this.root, e);
+          e = path2.join(this.root, e);
         }
         this._emitMatch(index, e);
       }
@@ -2283,9 +2283,9 @@ var require_glob = __commonJS((exports2, module2) => {
     if (prefix && isAbsolute(prefix) && !this.nomount) {
       var trail = /[\/\\]$/.test(prefix);
       if (prefix.charAt(0) === "/") {
-        prefix = path.join(this.root, prefix);
+        prefix = path2.join(this.root, prefix);
       } else {
-        prefix = path.resolve(this.root, prefix);
+        prefix = path2.resolve(this.root, prefix);
         if (trail)
           prefix += "/";
       }
@@ -2361,7 +2361,7 @@ var require_glob = __commonJS((exports2, module2) => {
 // node_modules/rimraf/rimraf.js
 var require_rimraf = __commonJS((exports2, module2) => {
   var assert = require("assert");
-  var path = require("path");
+  var path2 = require("path");
   var fs2 = require("fs");
   var glob = void 0;
   try {
@@ -2543,7 +2543,7 @@ var require_rimraf = __commonJS((exports2, module2) => {
         return options.rmdir(p, cb);
       let errState;
       files.forEach((f) => {
-        rimraf2(path.join(p, f), options, (er2) => {
+        rimraf2(path2.join(p, f), options, (er2) => {
           if (errState)
             return;
           if (er2)
@@ -2618,7 +2618,7 @@ var require_rimraf = __commonJS((exports2, module2) => {
   var rmkidsSync = (p, options) => {
     assert(p);
     assert(options);
-    options.readdirSync(p).forEach((f) => rimrafSync(path.join(p, f), options));
+    options.readdirSync(p).forEach((f) => rimrafSync(path2.join(p, f), options));
     const retries = isWindows ? 100 : 1;
     let i = 0;
     do {
@@ -2646,65 +2646,18 @@ var import_rimraf = __toModule(require_rimraf());
 
 // src/binarypath.ts
 var os = __toModule(require("os"));
-var binaryInfo = () => {
-  const osType = os.type();
-  const osArch = os.arch();
-  console.log(`osType: ${osType}, osArch: ${osArch}`);
-  switch (osType) {
-    case "Darwin":
-      switch (osArch) {
-        case "x64":
-          return {
-            binaryPath: "/usr/local/bin/wunderctl",
-            installDir: "/usr/local/bin",
-            downloadURL: (version) => `https://github.com/wundergraph/wunderctl/releases/download/v${version}/wunderctl_${version}_Darwin_x86_64.tar.gz`
-          };
-        default:
-          throw new Error(`os arch unsupported: ${osType} ${osArch}`);
-      }
-    case "Linux":
-      switch (osArch) {
-        case "x64":
-          return {
-            binaryPath: "/usr/local/bin/wunderctl",
-            installDir: "/usr/local/bin",
-            downloadURL: (version) => `https://github.com/wundergraph/wunderctl/releases/download/v${version}/wunderctl_${version}_Linux_x86_64.tar.gz`
-          };
-        case "x32":
-          return {
-            binaryPath: "/usr/local/bin/wunderctl",
-            installDir: "/usr/local/bin",
-            downloadURL: (version) => `https://github.com/wundergraph/wunderctl/releases/download/v${version}/wunderctl_${version}_Linux_i386.tar.gz`
-          };
-        default:
-          throw new Error(`os arch unsupported: ${osType} ${osArch}`);
-      }
-    case "Windows_NT":
-      switch (osArch) {
-        case "x64":
-          return {
-            binaryPath: "C:\\Program Files\\wunderctl.exe",
-            installDir: "C:\\Program Files",
-            downloadURL: (version) => `https://github.com/wundergraph/wunderctl/releases/download/v${version}/wunderctl_${version}_Windows_x86_64.tar.gz`
-          };
-        case "x32":
-          return {
-            binaryPath: "C:\\Program Files\\wunderctl.exe",
-            installDir: "C:\\Program Files",
-            downloadURL: (version) => `https://github.com/wundergraph/wunderctl/releases/download/v${version}/wunderctl_${version}_Windows_i386.tar.gz`
-          };
-        default:
-          throw new Error(`os arch unsupported: ${osType} ${osArch}`);
-      }
-    default:
-      throw new Error(`os type unsupported: ${osType}`);
-  }
+var import_path = __toModule(require("path"));
+var wunderctlPath = () => {
+  return import_path.default.join(wunderGraphDir(), "wunderctl");
+};
+var wunderGraphDir = () => {
+  return import_path.default.join(os.homedir(), ".wundergraph");
 };
 
 // src/uninstall.ts
 var uninstall = () => {
   console.log("uninstalling wunderctl");
-  const {binaryPath} = binaryInfo();
+  const binaryPath = wunderctlPath();
   const exists = fs.existsSync(binaryPath);
   if (!exists) {
     console.log("wunderctl not found at install dir");

@@ -1,8 +1,11 @@
 {
   "name": "@wundergraph/wunderctl",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "WunderGraph Command Line Interface",
-  "main": "dist/install.js",
+  "main": "dist/run.js",
+  "bin": {
+    "wunderctl": "dist/run.js"
+  },
   "scripts": {
     "build": "esbuild ./src/*** --bundle --platform=node --outdir=./dist",
     "set-version": "node dist/set-version.js",

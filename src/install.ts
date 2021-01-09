@@ -1,13 +1,18 @@
 import axios from "axios";
 import {x} from "tar";
-import {binaryInfo} from "./binarypath";
+import {downloadURL, wunderGraphDir} from "./binarypath";
 import * as fs from "fs";
 
 const install = async () => {
 
-    const {downloadURL,installDir} = binaryInfo();
+    const installDir = wunderGraphDir();
+
     console.log(`installing wunderctl to: ${installDir}`);
     const version = JSON.parse(fs.readFileSync("package.json").toString()).version;
+
+    if (!fs.existsSync(installDir)){
+        fs.mkdirSync(installDir,{recursive: true})
+    }
 
     try {
         const res = await axios({url: downloadURL(version), responseType: "stream"});
