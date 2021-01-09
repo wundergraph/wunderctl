@@ -28,4 +28,4 @@ const error = (msg: string) => {
     process.exit(1);
 };
 
-export default run();
+export default run;

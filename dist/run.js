@@ -63,4 +63,4 @@ var error = (msg) => {
   console.error(msg);
   process.exit(1);
 };
-var run_default = run();
+var run_default = run;
