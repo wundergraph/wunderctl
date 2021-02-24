@@ -1,7 +1,8 @@
 import axios from "axios";
 import {x} from "tar";
-import {downloadURL, wunderGraphDir} from "./binarypath";
+import {downloadURL, wunderctlPath, wunderGraphDir} from "./binarypath";
 import * as fs from "fs";
+import rimraf from "rimraf";
 
 const install = async () => {
 
@@ -12,6 +13,17 @@ const install = async () => {
 
     if (!fs.existsSync(installDir)){
         fs.mkdirSync(installDir,{recursive: true})
+    }
+
+    const binaryPath = wunderctlPath();
+    if (fs.existsSync(binaryPath)){
+        rimraf(binaryPath,(err) => {
+            if (err){
+                console.log("error uninstalling previous version")
+                return
+            }
+            console.log("previous version uninstalled");
+        })
     }
 
     try {

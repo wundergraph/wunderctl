@@ -2660,7 +2660,7 @@ var uninstall = () => {
   const binaryPath = wunderctlPath();
   const exists = fs.existsSync(binaryPath);
   if (!exists) {
-    console.log("wunderctl not found at install dir");
+    console.log("wunderctl not found at install dir, skipping uninstall");
     return;
   }
   import_rimraf.default(binaryPath, (e) => {
