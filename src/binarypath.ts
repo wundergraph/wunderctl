@@ -7,6 +7,8 @@ export const downloadURL = (version: string) :string => {
     switch (osType){
         case "Darwin":
             switch (osArch){
+                case "arm64":
+                    return `https://github.com/wundergraph/wunderctl/releases/download/v${version}/wunderctl_${version}_Darwin_arm64.tar.gz`
                 case "x64":
                     return `https://github.com/wundergraph/wunderctl/releases/download/v${version}/wunderctl_${version}_Darwin_x86_64.tar.gz`
                 default:
