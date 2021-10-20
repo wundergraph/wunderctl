@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "esbuild ./src/*** --bundle --platform=node --outdir=./dist",
+    "check": "tsc --noEmit",
     "set-version": "node dist/set-version.js",
     "devinstall": "ts-node src/install.ts",
     "postinstall": "node dist/install.js",
