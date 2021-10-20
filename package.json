@@ -3,6 +3,7 @@
   "version": "0.0.3",
   "description": "WunderGraph Command Line Interface",
   "main": "run.js",
+  "license": "MIT",
   "bin": {
     "wunderctl": "run.js"
   },
