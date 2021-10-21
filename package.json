@@ -3,11 +3,13 @@
   "version": "0.0.3",
   "description": "WunderGraph Command Line Interface",
   "main": "run.js",
+  "license": "MIT",
   "bin": {
     "wunderctl": "run.js"
   },
   "scripts": {
     "build": "esbuild ./src/*** --bundle --platform=node --outdir=./dist",
+    "check": "tsc --noEmit",
     "set-version": "node dist/set-version.js",
     "devinstall": "ts-node src/install.ts",
     "postinstall": "node dist/install.js",
