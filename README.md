@@ -1,3 +1,5 @@
+> **Warning**: This repository is deprecated. Please see [wundergraph](https://github.com/wundergraph/wundergraph).
+
 # wunderctl - The WunderGraph Command Line Interface
 
 You can use `wunderctl` to initialize new WunderGraph Applications and develop locally.
